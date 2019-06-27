@@ -1,0 +1,21 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="div" class="@classname" Attributes="@UnknownParameters">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+    get
+    {
+      var pos = Type != GeneralPositionType.None ? Type.GetValue("uk-position-") : null;
+      var margin = MarginSize != SmallToLargeSize.None ? MarginSize.GetValue("uk-position-") : null;
+      return $"{pos} {margin} {Class}";
+    }
+  }
+  [Parameter] private GeneralPositionType Type { get; set; }
+  [Parameter] private SmallToLargeSize MarginSize { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

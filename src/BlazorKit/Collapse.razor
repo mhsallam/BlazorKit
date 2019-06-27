@@ -1,0 +1,22 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+    @ChildContent
+</DynamicElement>
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            var open = IsOpen ? "show" : null;
+            var navbar = IsNavbar ? "navbar-collapse" : null;
+            return $"collapse {navbar} {open} {Class}";
+        }
+    }
+
+    [Parameter] private bool IsOpen { get; set; }
+    [Parameter] private bool IsNavbar { get; set; }
+    [Parameter] private string Class { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+}

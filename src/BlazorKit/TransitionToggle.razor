@@ -1,0 +1,18 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="span" class="@classname" Attributes="@UnknownParameters" tabindex="@TabIndex">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+      get
+      {
+          return $"uk-transition-toggle {Class}";
+      }
+  }
+  [Parameter] private int TabIndex { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

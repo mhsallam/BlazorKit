@@ -1,0 +1,29 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="form" class="@classname" onsubmit="@InternalOnSubmit">
+    @ChildContent 
+</DynamicElement>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var layout = Layout != FormLayout.None ? $"uk-form-{Layout.ToString().ToLower()}" : null;
+      return $"{layout} {Class}";
+    }
+  }
+  [Parameter] private FormLayout Layout { get; set; } = FormLayout.None;
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+  [Parameter] private EventCallback OnSubmit { get; set; }
+
+  async Task InternalOnSubmit(object e)
+  {
+    Console.WriteLine(e);
+    if(OnSubmit.HasDelegate)
+    {
+      await OnSubmit.InvokeAsync(new object());
+    }
+  }
+}

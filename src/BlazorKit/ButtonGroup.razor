@@ -1,0 +1,18 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      return $"uk-button-group {Class}";
+    }
+  }
+  [Parameter] private Size Size { get; set; } = Size.None;
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

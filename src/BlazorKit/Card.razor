@@ -1,0 +1,41 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var color = Color != BaseColor.None ? Color.GetValue<BaseColor>("uk-card-") : null;
+      var size = Size != BaseSize.None ? $"uk-card-{Size.ToString().ToLower()}" : null;
+      var withMedia = WithMedia ? "uk-grid-collapse" : null;
+      var margin = WithMargin ? "uk-margin" : null;
+      return $"uk-card {withMedia} {margin} {color} {size} {Class}";
+    }
+  }
+  [Parameter] private BaseColor Color { get; set; } = BaseColor.None;
+  [Parameter] private BaseSize Size { get; set; } = BaseSize.None;
+  [Parameter] private bool WithMargin { get; set; }
+  private bool _withMedia { get; set; }
+  [Parameter]
+  private bool WithMedia
+  {
+    get
+    {
+      return _withMedia;
+    }
+    set
+    {
+      _withMedia = value;
+      if (_withMedia)
+      {
+        UnknownParameters.Add("uk-grid", true);
+      }
+    }
+  }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

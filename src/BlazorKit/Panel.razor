@@ -1,0 +1,29 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="div" class="@classname" Attributes="@UnknownParameters">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+    get
+    {
+      var height = Height != HeightSize.None ? Height.GetValue<HeightSize>("uk-height-") : null;
+      var scrollable = Scrollable ? "uk-panel-scrollable" : null;
+      var resize = Resize != ResizeDirection.None ? Resize.GetValue<ResizeDirection>("uk-") : null;
+      var boxShadow = BoxShadow != SmallToExtraSize.None ? BoxShadow.GetValue<SmallToExtraSize>("uk-") : null;
+      var boxShadowBottom = BoxShadowBottom ? "uk-box-shadow-bottom" : null;
+      var boxShadowHover = BoxShadowHover != SmallToExtraSize.None ? BoxShadowHover.GetValue<SmallToExtraSize>("uk-box-shadow-hover-") : null;
+      return $"uk-panel {scrollable} {height} {resize} {boxShadow} {boxShadowBottom} {boxShadowHover} {Class}";
+    }
+  }
+  [Parameter] private HeightSize Height { get; set; } = HeightSize.None;
+  [Parameter] private ResizeDirection Resize { get; set; } = ResizeDirection.None;
+  [Parameter] private SmallToExtraSize BoxShadow { get; set; } = SmallToExtraSize.None;
+  [Parameter] private SmallToExtraSize BoxShadowHover { get; set; } = SmallToExtraSize.None;
+  [Parameter] private bool BoxShadowBottom { get; set; }
+  [Parameter] private bool Scrollable { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

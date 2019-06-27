@@ -1,0 +1,38 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="nav" Attributes="@UnknownParameters" class="@classname" uk-navbar="@options">
+  @ChildContent
+  @if(IsDropbar)
+  {
+    <div class="uk-navbar-dropbar"></div>
+  }
+</DynamicElement>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var transparent = IsTransparent ? "uk-navbar-transparent" : null;
+      var withBg = WithBackground ? "uk-navbar-container" : null;
+      return $"{withBg} {transparent} {Class}";
+    }
+  }
+  string options
+  {
+    get
+    {
+      var mode = Mode != MouseActionMode.Hover ? $"mode: {Mode.GetValue<MouseActionMode>()}" : null;
+      var isDropbar = IsDropbar ? $"dropbar: true" : null;
+      var isPushDropbar = IsPushDropbar ? "dropbar-mode: push" : null;
+      return string.Join("; ", new List<string> { isDropbar });
+    }
+  }
+  [Parameter] private MouseActionMode Mode { get; set; } = MouseActionMode.Hover;
+  [Parameter] private bool IsTransparent { get; set; }
+  [Parameter] private bool IsDropbar { get; set; }
+  [Parameter] private bool IsPushDropbar { get; set; }
+  [Parameter] private bool WithBackground { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,34 @@
+﻿@inherits BlazorKitComponentBase
+@using BlazorKit.Util
+@using Microsoft.AspNetCore.Components
+
+  <InLine>
+    <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+      @ChildContent
+    </DynamicElement>
+  </InLine>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var style = Style != TextStyle.None ? Style.GetValue<TextStyle>("uk-text-") : null;
+      var transformStyle = TransformStyle != TextTransformStyle.None ? TransformStyle.GetValue<TextTransformStyle>("uk-text-") : null;
+      var color = Color != TextColor.None ? Color.GetValue<TextColor>("uk-text-") : null;
+      var align = Align != ResponsiveAlignment.None ? Align.GetValue<ResponsiveAlignment>("uk-text-") : null;
+      var verticalAlign = VerticalAlign != InlineVerticalAlignment.None ? VerticalAlign.GetValue<InlineVerticalAlignment>("uk-text-") : null;
+      var wrap = Wrap != TextWrap.None ? Wrap.GetValue<TextWrap>("uk-text-") : null;
+      return $"{style} {transformStyle} {color} {align} {verticalAlign} {wrap} {Class}";
+    }
+  }
+
+  [Parameter] private TextStyle Style { get; set; }
+  [Parameter] private TextTransformStyle TransformStyle { get; set; }
+  [Parameter] private TextColor Color { get; set; }
+  [Parameter] private ResponsiveAlignment Align { get; set; }
+  [Parameter] private InlineVerticalAlignment VerticalAlign { get; set; }
+  [Parameter] private TextWrap Wrap { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

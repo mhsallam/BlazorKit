@@ -1,0 +1,33 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="li" class="@classname">
+  @if (IsActive)
+  {
+    <span>@ChildContent</span>
+  }
+  else if (IsDisabled)
+  {
+    <a>@ChildContent</a>
+  }
+  else
+  {
+    <a href="@Href">@ChildContent</a>
+  }
+</DynamicElement>
+
+
+@functions {
+  private string classname
+  {
+    get
+    {
+      var isDisabled = IsDisabled ? "uk-disabled" : null;
+      return $"{isDisabled} {Class}";
+    }
+  }
+  [Parameter] private bool IsActive { get; set; }
+  [Parameter] private bool IsDisabled { get; set; }
+  [Parameter] private string Href { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

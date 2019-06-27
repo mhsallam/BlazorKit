@@ -1,0 +1,17 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="li" class="@classname" Attributes="@UnknownParameters">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+    get
+    {
+      return $"{Class}";
+    }
+  }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

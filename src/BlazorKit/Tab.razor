@@ -1,0 +1,23 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="ul" Attributes="@UnknownParameters" class="@classname" uk-tab>
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var bottom = IsBottom ? "uk-tab-bottom" : null;
+      var alignment = Alignment != Alignment.None ? $"uk-flex-{Alignment.ToString().ToLower()}" : null;
+      var flexAlignment = FlexAlignment != FlexAlignment.None ? $"uk-tab-{FlexAlignment.ToString().ToLower()}" : null;
+      return $"{bottom} {alignment} {flexAlignment} {Class}";
+    }
+  }
+  [Parameter] private bool IsBottom { get; set; }
+  [Parameter] private Alignment Alignment { get; set; } = Alignment.None;
+  [Parameter] private FlexAlignment FlexAlignment { get; set; } = FlexAlignment.None;
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

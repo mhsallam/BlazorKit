@@ -1,0 +1,29 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname" uk-grid>
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+    get
+    {
+      var width = Width != WidthSize.None ? Width.GetValues<WidthSize>(" ", "uk-width-") : null;
+      var childWidth = ChildWidth != WidthSize.None ? ChildWidth.GetValues<WidthSize>(" ", "uk-child-width-") : null;
+      var gutterSize = GutterSize != GutterSize.None ? $"uk-gird-{GutterSize.ToString().ToLower()}" : null;
+      var flexAlignment = FlexAlignment != FlexAlignment.None ? $"uk-flex-{FlexAlignment.ToString().ToLower()}" : null;
+      var withDivider = WithDivider ? "uk-gird-divider" : null;
+      var matchHeight = MatchHeight ? "uk-gird-match" : null;
+      return $"{childWidth} {gutterSize} {withDivider} {matchHeight} {flexAlignment} {Class}";
+    }
+  }
+  [Parameter] private WidthSize Width { get; set; } = WidthSize.None;
+  [Parameter] private WidthSize ChildWidth { get; set; } = WidthSize.None;
+  [Parameter] private FlexAlignment FlexAlignment { get; set; } = FlexAlignment.None;
+  [Parameter] private GutterSize GutterSize { get; set; } = GutterSize.None;
+  [Parameter] private bool WithDivider { get; set; }
+  [Parameter] private bool MatchHeight { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,25 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+  <img src=@Src alt="@Alt" uk-cover />
+  <canvas width=@Width height=@Height></canvas>
+</DynamicElement>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var container = Height + Width > 0 ? "uk-cover-container" : null;
+      var mediaPosition = Position != EdgePosition.None ? Position.ToString().ToLower() : null;
+      return $"uk-card-media-{mediaPosition} {container} {Class}";
+    }
+  }
+  [Parameter] private string Src { get; set; }
+  [Parameter] private string Alt { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private int Height { get; set; }
+  [Parameter] private int Width { get; set; }
+  [Parameter] private EdgePosition Position { get; set; } = EdgePosition.None;
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

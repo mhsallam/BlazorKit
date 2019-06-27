@@ -1,0 +1,19 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="span" class="@classname" Attributes="@UnknownParameters">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+    get
+    {
+      var animation = Animation != TransitionType.None ? Animation.GetValue<TransitionType>("uk-transition-") : null;
+      return $"{animation} {Class}";
+    }
+  }
+  [Parameter] private TransitionType Animation { get; set; } = TransitionType.None;
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

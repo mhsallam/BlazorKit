@@ -1,0 +1,19 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="span" class="@classname" Attributes="@UnknownParameters">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+    get
+    {
+      var style = Style != LabelStyle.None ? Style.GetValue<LabelStyle>("uk-label-") : null;
+      return $"uk-label {style} {Class}";
+    }
+  }
+  [Parameter] private LabelStyle Style { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

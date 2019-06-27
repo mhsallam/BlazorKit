@@ -1,0 +1,19 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="li" Attributes="@UnknownParameters" class="@classname">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      return $"uk-navbar-nav {Class}";
+    }
+  }
+  [Parameter] private bool IsActive { get; set; }
+  [Parameter] private string Subtitle { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,12 @@
+/.vs
+<<<<<<< HEAD
+/src/BlazorKit/bin
+/src/BlazorKit/obj
+/src/BlazorKit.Web
+=======
+/src/Blazorkit/bin
+/src/Blazorkit/obj
+/src/Blazorkit.Web
+>>>>>>> 13a40bacf9f568467e44e2afeaaf895eb51ec01c
+#/src/BlazorKit.Web/Properties
+/vendors

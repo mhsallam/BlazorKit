@@ -1,0 +1,25 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="ul" class="@classname" Attributes="@UnknownParameters">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+    get
+    {
+      var bullet = IsBullet ? "uk-list-bullet" : null;
+      var divider = WidthDivider ? "uk-list-divider" : null;
+      var striped = IsStriped ? "uk-list-striped" : null;
+      var large = IsLarge ? "uk-list-large" : null;
+      return $"uk-list {bullet} {divider} {striped} {large} {Class}";
+    }
+  }
+  [Parameter] private bool IsBullet { get; set; }
+  [Parameter] private bool WidthDivider { get; set; }
+  [Parameter] private bool IsStriped { get; set; }
+  [Parameter] private bool IsLarge { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

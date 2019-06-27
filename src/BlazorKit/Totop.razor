@@ -1,0 +1,10 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="a" class="@Class" Attributes="@UnknownParameters" uk-totop>
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

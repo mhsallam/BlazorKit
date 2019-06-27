@@ -1,0 +1,31 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="div" class="@classname" Attributes="@UnknownParameters" uk-leader>
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+    get
+    {
+      return $"uk-width-expand {Class}";
+    }
+  }
+  private string _fill { get; set; }
+  [Parameter] private string Fill {
+    get
+    {
+      return _fill;
+    }
+    set {
+      _fill = value;
+      if(!string.IsNullOrEmpty(_fill))
+      {
+        UnknownParameters.Add("uk-leader", $"fill: {_fill}");
+      }
+    }
+  }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

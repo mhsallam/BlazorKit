@@ -1,0 +1,94 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="span" class="@Class" uk-tooltip>
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string _title { get; set; }
+  [Parameter]
+  private string Title
+  {
+    get { return _title; }
+    set
+    {
+      _title = value;
+      generateOptions();
+    }
+  }
+  private OuterPositionType _position { get; set; } = OuterPositionType.None;
+  [Parameter]
+  private OuterPositionType Position
+  {
+    get { return _position; }
+    set
+    {
+      _position = value;
+      generateOptions();
+    }
+  }
+  private int _delay { get; set; }
+  [Parameter]
+  private int Delay
+  {
+    get { return _delay; }
+    set
+    {
+      _delay= value;
+      generateOptions();
+    }
+  }
+  private BaseAnimationType _animation { get; set; } = BaseAnimationType.None;
+  [Parameter]
+  private BaseAnimationType Animation
+  {
+    get { return _animation; }
+    set
+    {
+      _animation = value;
+      generateOptions();
+    }
+  }
+  private int _duration { get; set; }
+  [Parameter]
+  private int Duration
+  {
+    get { return _duration; }
+    set
+    {
+      _duration = value;
+      generateOptions();
+    }
+  }
+  private void generateOptions()
+  {
+    List<string> ops = new List<string>();
+    if (!string.IsNullOrWhiteSpace(_title))
+    {
+      ops.Add($"title: {_title}");
+    }
+    if (!string.IsNullOrWhiteSpace(_title))
+    {
+      ops.Add($"title: {_title}");
+    }
+    if (_position != OuterPositionType.None)
+    {
+      ops.Add($"position: {_position.GetValue<OuterPositionType>("")}");
+    }
+    if (_animation != BaseAnimationType.None)
+    {
+      ops.Add($"animation: {_animation.GetValues<BaseAnimationType>(", ")}");
+    }
+    if (_duration > 0)
+    {
+      ops.Add($"duration: {_duration}");
+    }
+
+    if (ops.Count > 0)
+    {
+      UnknownParameters.Add("uk-tooltip", string.Join("; ", ops));
+    }
+  }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

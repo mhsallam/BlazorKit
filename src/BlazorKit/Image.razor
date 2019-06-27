@@ -1,0 +1,82 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="img" class="@Class" uk-img />
+
+@functions {
+  private string _src { get; set; }
+  [Parameter]
+  private string Source
+  {
+    get { return _src; }
+    set
+    {
+      _src = value;
+      generateOptions();
+    }
+  }
+  private bool _isSVG { get; set; }
+  [Parameter]
+  private bool IsSVG
+  {
+    get { return _isSVG; }
+    set
+    {
+      _isSVG = value;
+      generateOptions();
+    }
+  }
+  private bool _isLazyLoad { get; set; }
+  [Parameter]
+  private bool IsLazyLoad
+  {
+    get { return _isLazyLoad; }
+    set
+    {
+      _isLazyLoad = value;
+      generateOptions();
+    }
+  }
+  private string _visibilityTarget { get; set; }
+  [Parameter]
+  private string VisibilityTarget
+  {
+    get { return _visibilityTarget; }
+    set
+    {
+      _visibilityTarget = value;
+      generateOptions();
+    }
+  }
+  private string _srcSet { get; set; }
+  [Parameter]
+  private string SrcSet
+  {
+    get { return _srcSet; }
+    set
+    {
+      _srcSet = value;
+      UnknownParameters.Add("data-srcset", _srcSet);
+    }
+  }
+  [Parameter] private string Class { get; set; }
+  private void generateOptions()
+  {
+    List<string> ops = new List<string>();
+    if (!string.IsNullOrWhiteSpace(_src))
+    {
+      if (_isLazyLoad)
+      {
+        ops.Add($"data-src: {_src}");
+      }
+      else
+      {
+        UnknownParameters.Add("data-src", _src);
+      }
+    }
+    if(!string.IsNullOrWhiteSpace(_visibilityTarget))
+    {
+        ops.Add($"target: {_visibilityTarget}");
+    }
+    UnknownParameters.Add("uk-img", string.Join("; ",ops));
+  }
+}

@@ -1,0 +1,44 @@
+﻿@inherits BlazorKitComponentBase
+
+@if (WidthScroll)
+{
+  <div class="uk-overflow-auto">
+    <DynamicElement TagName="table" Attributes="@UnknownParameters" class="@classname">
+      @ChildContent
+    </DynamicElement>
+  </div>
+}
+else
+{
+  <DynamicElement TagName="table" Attributes="@UnknownParameters" class="@classname">
+    @ChildContent
+  </DynamicElement>
+}
+@functions {
+  string classname
+  {
+    get
+    {
+      var size = Size != Size.None ? Size.GetValue<Size>("uk-table-") : null;
+      var alignment = Alignment != Alignment.None ? $"uk-table-{Alignment.ToString().ToLower()}" : null;
+      var middle = IsMiddle ? $"uk-table-middle" : null;
+      var divider = WidthDivider ? $"uk-table-divider" : null;
+      var striped = IsStriped ? $"uk-table-striped" : null;
+      var hover = IsHover ? $"uk-table-hover" : null;
+      var justify = IsJustify ? $"uk-table-justify" : null;
+      var responsive = IsResponsive ? $"uk-table-responsive" : null;
+      return $"uk-table {divider} {size} {striped} {hover} {justify} {alignment} {middle} {responsive} {Class}";
+    }
+  }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private Size Size { get; set; } = Size.None;
+  [Parameter] private Alignment Alignment { get; set; } = Alignment.None;
+  [Parameter] private bool IsMiddle { get; set; }
+  [Parameter] private bool WidthDivider { get; set; }
+  [Parameter] private bool WidthScroll { get; set; }
+  [Parameter] private bool IsStriped { get; set; }
+  [Parameter] private bool IsHover { get; set; }
+  [Parameter] private bool IsJustify { get; set; }
+  [Parameter] private bool IsResponsive { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

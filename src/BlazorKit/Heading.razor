@@ -1,0 +1,27 @@
+﻿@inherits BlazorKitComponentBase
+<DynamicElement TagName="@Tag" class="@classname" Attributes="@UnknownParameters">
+    @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+    get
+    {
+      var size = Size != Size.None ? Size.GetValue<Size>("uk-heading-") : null;
+      var divider = WithDivider ? "uk-heading-divider" : null;
+      var bullet = Bullet ? "uk-heading-bullet" : null;
+      var line = Line ? "uk-heading-line" : null;
+      var alignment = Alignment != Alignment.None ? $"uk-text-{Alignment.ToString().ToLower()}" : null;
+      return $"{size} {bullet} {line} {divider} {alignment} {Class}";
+    }
+  }
+  private string Tag { get; set; } = "h1";
+  [Parameter] private Size Size { get; set; } = Size.Small;
+  [Parameter] private string Class { get; set; }
+  [Parameter] private Boolean WithDivider { get; set; }
+  [Parameter] private Boolean Bullet { get; set; }
+  [Parameter] private Boolean Line { get; set; }
+  [Parameter] private Alignment Alignment { get; set; } = Alignment.None;
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,20 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="h3" class="@classname">
+    @ChildContent
+</DynamicElement>
+
+
+@functions {
+    private string classname
+    {
+        get
+        {
+            return $"popover-header {Class}";
+        }
+    }
+
+    [Parameter] private string Class { get; set; }
+    [Parameter] private string Style { get; set; }
+    [Parameter] private RenderFragment ChildContent { get; set; }
+}

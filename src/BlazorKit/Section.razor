@@ -1,0 +1,20 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+    @ChildContent
+</DynamicElement>
+
+    @functions {
+      private string classname
+      {
+        get
+        {
+          var color = Color != BackgroundColor.None ? Color.GetValue<BackgroundColor>("uk-section-") : null;
+          return $"uk-section {color} {Class}";
+        }
+      }
+
+      [Parameter] private BackgroundColor Color { get; set; } = BackgroundColor.None;
+      [Parameter] private string Class { get; set; }
+      [Parameter] private RenderFragment ChildContent { get; set; }
+    }

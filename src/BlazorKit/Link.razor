@@ -1,0 +1,88 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="@tag" Attributes="@UnknownParameters" class="@classname">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+    get
+    {
+      var tp = Type.GetValue<LinkType>("uk-link-");
+      return $"{tp} {Class}";
+    }
+  }
+  private string tag
+  {
+    get
+    {
+      return Type == LinkType.Toggle ? "div" : "a";
+    }
+  }
+
+  private string _href { get; set; }
+  [Parameter] private string Href {
+    get { return _href; }
+    set
+    {
+      _href = value;
+      if(!string.IsNullOrWhiteSpace(_href))
+      {
+        UnknownParameters.Add("href", _href);
+      }
+    }
+  }
+  private string _alt { get; set; }
+  [Parameter] private string Alt
+  {
+    get { return _alt; }
+    set
+    {
+      _alt = value;
+      if(!string.IsNullOrWhiteSpace(_alt))
+      {
+        UnknownParameters.Add("data-alt", _alt);
+      }
+    }
+  }
+  private string _caption { get; set; }
+  [Parameter] private string Caption {
+    get { return _caption; }
+    set
+    {
+      _caption = value;
+      if(!string.IsNullOrWhiteSpace(_caption))
+      {
+        UnknownParameters.Add("data-caption", _caption);
+      }
+    }
+  }
+  private string _poster { get; set; }
+  [Parameter] private string Poster {
+    get { return _poster; }
+    set
+    {
+      _poster = value;
+      if(!string.IsNullOrEmpty(_poster))
+      {
+        UnknownParameters.Add("data-poster", _poster);
+      }
+    }
+  }
+  private MediaType _mediaType { get; set; } = MediaType.Auto;
+  [Parameter] private MediaType MediaType {
+    get { return _mediaType; }
+    set
+    {
+      _mediaType = value;
+      if(_mediaType != MediaType.Auto)
+      {
+        UnknownParameters.Add("data-type", _mediaType.GetValue<MediaType>());
+      }
+    }
+  }
+  [Parameter] private LinkType Type { get; set; } = LinkType.Heading;
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,33 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="li" Attributes="@UnknownParameters" class="@classname">
+  <a href="@Href">
+    @if (!string.IsNullOrWhiteSpace(Subtitle))
+    {
+      <div>
+        @ChildContent
+        <div class="uk-navbar-subtitle">@Subtitle</div>
+      </div>
+    }
+    else
+    {
+      @ChildContent
+    }
+  </a>
+</DynamicElement>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var isActive = IsActive ? "uk-active" : null;
+      return $"{isActive} {Class}";
+    }
+  }
+  [Parameter] private bool IsActive { get; set; }
+  [Parameter] private string Subtitle { get; set; }
+  [Parameter] private string Href { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

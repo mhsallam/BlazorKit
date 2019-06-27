@@ -1,0 +1,23 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="@Tag" Attributes="@UnknownParameters" class="@classname">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var logo = IsLogo ? "uk-logo" : null;
+      return $"uk-navbar-item {logo} {Class}";
+    }
+  }
+  string Tag {
+    get { return string.IsNullOrWhiteSpace(Href) ? "div" : "a"; }
+  }
+  [Parameter] private string Href { get; set; }
+  [Parameter] private bool IsLogo { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

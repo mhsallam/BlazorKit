@@ -1,0 +1,23 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="th" class="@classname">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var shrink = IsShrink ? "uk-table-shrink" : null;
+      var expand = IsExpand ? "uk-table-expand" : null;
+      var width = IsExpand ? $"uk-table-width-{Width}" : null;
+      return $"{shrink} {expand} {width} {Class}";
+    }
+  }
+  [Parameter] private bool IsShrink { get; set; }
+  [Parameter] private bool IsExpand { get; set; }
+  [Parameter] private string Width { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

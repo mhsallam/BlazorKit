@@ -1,0 +1,18 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="label" class="@classname" for="@For" Attributes="@UnknownParameters">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+      get
+      {
+          return $"uk-form-label {Class}";
+      }
+  }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private string For { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

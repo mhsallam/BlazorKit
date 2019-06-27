@@ -1,0 +1,32 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+    @ChildContent
+</DynamicElement>
+
+    @functions {
+      private string classname
+      {
+        get
+        {
+          var color = Color != BackgroundColor.None ? Color.GetValue<BackgroundColor>("uk-background-") : null;
+          var blend = BlendMode != BlendMode.None ? BlendMode.GetValue<BlendMode>("uk-background-blend-") : null;
+          var size = Size != BackgroundSize.None ? Size.GetValue<BackgroundSize>("uk-background-") : null;
+          var pos = Position != PositionType.None ? Position.GetValue<PositionType>("uk-background-") : null;
+          var responsiveDisplay = ResponsiveDisplay != ResponsiveScreen.None ? ResponsiveDisplay.GetValues<ResponsiveScreen>(" ", "uk-background-image") : null;
+          var noRepeat = IsNoRepeat ? "uk-background-norepeat" : null;
+          var isFixed = IsFixed ? "uk-background-fixed" : null;
+          return $"{color} {blend} {size} {noRepeat} {isFixed} {responsiveDisplay} {Class}";
+        }
+      }
+
+      [Parameter] private BackgroundColor Color { get; set; } = BackgroundColor.None;
+      [Parameter] private BlendMode BlendMode { get; set; } = BlendMode.None;
+      [Parameter] private BackgroundSize Size { get; set; } = BackgroundSize.None;
+      [Parameter] private PositionType Position { get; set; } = PositionType.None;
+      [Parameter] private ResponsiveScreen ResponsiveDisplay { get; set; } = ResponsiveScreen.None;
+      [Parameter] private bool IsNoRepeat { get; set; }
+      [Parameter] private bool IsFixed { get; set; }
+      [Parameter] private string Class { get; set; }
+      [Parameter] private RenderFragment ChildContent { get; set; }
+    }

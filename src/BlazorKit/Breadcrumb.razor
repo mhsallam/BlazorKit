@@ -1,0 +1,20 @@
+﻿@inherits BlazorKitComponentBase
+
+<nav aria-label="breadcrumb">
+  <DynamicElement Attributes="@UnknownParameters" TagName="ul" class="@classname">
+    @ChildContent
+  </DynamicElement>
+</nav>
+
+
+@functions {
+  string classname
+  {
+    get
+    {
+      return $"uk-breadcrumb {Class}";
+    }
+  }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,26 @@
+﻿@inherits BlazorKitComponentBase
+@using BlazorKit.Util
+@using Microsoft.AspNetCore.Components
+
+  <InLine>
+    <DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+      @ChildContent
+    </DynamicElement>
+  </InLine>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var bg = BackgroundColor != BackgroundColor.None ? BackgroundColor.GetValue<BackgroundColor>("uk-title-") : null;
+      var padding = Padding != PaddingSize.None ? Padding.GetValue<PaddingSize>("uk-padding") : null;
+      return $"uk-title {bg} {padding} {Class}";
+    }
+  }
+
+  [Parameter] private BackgroundColor BackgroundColor { get; set; }
+  [Parameter] private PaddingSize Padding { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

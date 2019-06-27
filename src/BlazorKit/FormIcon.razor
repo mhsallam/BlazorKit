@@ -1,0 +1,57 @@
+﻿@inherits BlazorKitComponentBase
+@using BlazorKit.Util
+@using Microsoft.AspNetCore.Components
+
+<InLine>
+  <DynamicElement Attributes="@UnknownParameters" TagName="@tag" class="@classname" uk-icon="@options">
+    @ChildContent
+  </DynamicElement>
+</InLine>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var fliped = IsFliped ? $"uk-form-icon-flip" : null;
+      return $"uk-form-icon {fliped} {Class}";
+    }
+  }
+  string options
+  {
+    get
+    {
+      var ops = Icon != null ? $"icon: {Icon}" : null;
+      return ops;
+    }
+  }
+
+  [Parameter] private bool IsFliped { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private string Icon { get; set; }
+
+  [Parameter]
+  private string tag
+  {
+    get
+    {
+      return _href != null ? "a" : "span";
+    }
+  }
+
+  private string _href = null;
+  [Parameter]
+  private string Href
+  {
+    get { return _href; }
+    set
+    {
+      _href = value;
+      if (_href != null)
+      {
+        UnknownParameters.Add("href", _href);
+      }
+    }
+  }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,41 @@
+﻿@inherits BlazorKitComponentBase
+@if (IsOpen)
+{
+
+  <DynamicElement uk-alert TagName="div" class="@classname" role="alert" Attributes="@UnknownParameters">
+    @ChildContent
+    @if (IsDismissible)
+    {
+      <a class="uk-alert-close" uk-close onclick="@onclick"></a>
+    }
+  </DynamicElement>
+}
+
+@functions {
+  private string classname
+  {
+    get
+    {
+      return $"{Color.GetValue<Color>("uk-alert-")} {Class}";
+    }
+  }
+  [Parameter] private Color Color { get; set; } = Color.Primary;
+  [Parameter] private bool IsDismissible { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+
+  /// <summary>
+  /// Gets or sets an action to be invoked when the alert is dismissed.
+  /// </summary>
+  [Parameter] private Action OnDismiss { get; set; }
+
+
+  private bool IsOpen { get; set; } = true;
+
+  void onclick()
+  {
+    IsOpen = false;
+    OnDismiss?.Invoke();
+    StateHasChanged();
+  }
+}

@@ -1,0 +1,9 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="tfoot">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

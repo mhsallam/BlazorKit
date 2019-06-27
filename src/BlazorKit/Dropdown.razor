@@ -1,0 +1,46 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement uk-dropdown="@options" Attributes="@UnknownParameters" TagName="div" class="@classname">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var width = Width.GetValues<WidthSize>(" ", "uk-width-");
+      return $"{width} {Class}";
+    }
+  }
+  string options
+  {
+    get
+    {
+      var mode = Mode != DropdownMode.Hover ? Mode.GetValue<DropdownMode>() : null;
+      var pos = Position != DropdownPosition.None ? Position.GetValue<DropdownPosition>() : null;
+      var boundary = BoundarySelector != null ? $"boundary: {BoundarySelector}" : null;
+      var boundaryAlign = !BoundaryAlign ? "boundary-align: true" : null;
+      var offset = Offset != null ? $"offset: {Offset}" : null;
+      var animation = Animation != AnimationType.None ? $"animation: {Animation.GetValue<AnimationType>()}" : null;
+      var duration = AnimationDuration != null ? $"duration: {AnimationDuration}" : null;
+      var delayShow = DelayShow != null ? $"delay-show: {DelayShow}" : null;
+      var delayHide = DelayHide != null ? $"delay-hide: {DelayHide}" : null;
+      return string.Join(";", new string[] {
+        mode, pos, boundary, boundaryAlign, offset, animation, duration, delayShow, delayHide
+      }.Where(s => s != null));
+    }
+  }
+  [Parameter] private DropdownPosition Position { get; set; } = DropdownPosition.None;
+  [Parameter] private string BoundarySelector { get; set; }
+  [Parameter] private bool BoundaryAlign { get; set; }
+  [Parameter] private string Offset { get; set; }
+  [Parameter] private WidthSize Width { get; set; } = WidthSize.None;
+  [Parameter] private DropdownMode Mode { get; set; } = DropdownMode.Hover;
+  [Parameter] private AnimationType Animation { get; set; } = AnimationType.None;
+  [Parameter] private string AnimationDuration { get; set; }
+  [Parameter] private string DelayShow { get; set; }
+  [Parameter] private string DelayHide { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

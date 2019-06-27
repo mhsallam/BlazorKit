@@ -1,0 +1,124 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="span" class="@Class">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string _target { get; set; }
+  [Parameter]
+  private string Target
+  {
+    get { return _target; }
+    set
+    {
+      _target = value;
+      generateOptions();
+    }
+  }
+  private string _toggleClass { get; set; }
+  [Parameter]
+  private string ToggleClass
+  {
+    get { return _toggleClass; }
+    set
+    {
+      _toggleClass = value;
+      generateOptions();
+    }
+  }
+  private bool _queued { get; set; }
+  [Parameter]
+  private bool Queued
+  {
+    get { return _queued; }
+    set
+    {
+      _queued = value;
+      generateOptions();
+    }
+  }
+  private ToggleMode _mode { get; set; }
+  [Parameter]
+  private ToggleMode Mode
+  {
+    get { return _mode; }
+    set
+    {
+      _mode = value;
+      generateOptions();
+    }
+  }
+  private string _media { get; set; }
+  [Parameter]
+  private string Media
+  {
+    get { return _media; }
+    set
+    {
+      _media = value;
+      generateOptions();
+    }
+  }
+  private AnimationType _animation { get; set; }
+  [Parameter]
+  private AnimationType Animation
+  {
+    get { return _animation; }
+    set
+    {
+      _animation = value;
+      generateOptions();
+    }
+  }
+  private int _duration{ get; set; }
+  [Parameter]
+  private int Duration
+  {
+    get { return _duration; }
+    set
+    {
+      _duration= value;
+      generateOptions();
+    }
+  }
+  private void generateOptions()
+  {
+    List<string> ops = new List<string>();
+    if (!string.IsNullOrWhiteSpace(_target))
+    {
+      ops.Add($"target: {_target}");
+    }
+    if (!string.IsNullOrWhiteSpace(_toggleClass))
+    {
+      ops.Add($"cls: {_toggleClass}");
+    }
+    if(_queued)
+    {
+      ops.Add("queued: true");
+    }
+    if (_mode != ToggleMode.None)
+    {
+      ops.Add($"mode: {_mode.GetValue<ToggleMode>()}");
+    }
+    if (!string.IsNullOrWhiteSpace(_media))
+    {
+      ops.Add($"media: {_media}");
+    }
+    if (_animation != AnimationType.None)
+    {
+      ops.Add($"animation: {_animation.GetValues<AnimationType>(", ")}");
+    }
+    if (_duration > 0)
+    {
+      ops.Add($"duration: {_duration}");
+    }
+
+    if(ops.Count > 0)
+    {
+      UnknownParameters.Add("uk-toggle", string.Join("; ", ops));
+    }
+  }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

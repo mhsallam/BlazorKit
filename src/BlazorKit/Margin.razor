@@ -1,0 +1,17 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="div" class="@classname" Attributes="@UnknownParameters" uk-margin>
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+      get
+      {
+          return $"uk-margin {Class}";
+      }
+  }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,20 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+    @ChildContent
+</DynamicElement>
+
+    @functions {
+      private string classname
+      {
+        get
+        {
+          var size = Size != ExtraSmallToExpandSize.None ? Size.GetValue<ExtraSmallToExpandSize>("uk-container-") : null;
+          return $"uk-container {size} {Class}";
+        }
+      }
+
+      [Parameter] private ExtraSmallToExpandSize Size { get; set; } = ExtraSmallToExpandSize.None;
+      [Parameter] private string Class { get; set; }
+      [Parameter] private RenderFragment ChildContent { get; set; }
+    }

@@ -1,0 +1,116 @@
+﻿@inherits BlazorKitComponentBase
+
+<DynamicElement TagName="div" class="@classname" Attributes="@UnknownParameters" uk-lightbox>
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  private string classname
+  {
+    get
+    {
+      return $"uk-width-expand {Class}";
+    }
+  }
+  private BaseAnimationType _animation { get; set; }
+  [Parameter] private BaseAnimationType Animation {
+    get
+    {
+      return _animation;
+    }
+    set {
+      _animation = value;
+      generateOptions();
+    }
+  }
+  private int _autoplay { get; set; }
+  [Parameter] private int Autoplay {
+    get
+    {
+      return _autoplay;
+    }
+    set {
+      _autoplay = value;
+      generateOptions();
+    }
+  }
+  private int _autoplayInterval { get; set; }
+  [Parameter] private int AutoplayInterval {
+    get
+    {
+      return _autoplayInterval;
+    }
+    set {
+      _autoplayInterval = value;
+      generateOptions();
+    }
+  }
+  private bool _pauseOnHover { get; set; }
+  [Parameter] private bool PauseOnHover {
+    get
+    {
+      return _pauseOnHover;
+    }
+    set {
+      _pauseOnHover = value;
+      generateOptions();
+    }
+  }
+  private bool _videoAutoplay { get; set; }
+  [Parameter] private bool VideoAutoplay {
+    get
+    {
+      return _videoAutoplay;
+    }
+    set {
+      _videoAutoplay = value;
+      generateOptions();
+    }
+  }
+  private int _index { get; set; }
+  [Parameter] private int Index {
+    get
+    {
+      return _index;
+    }
+    set {
+      _index = value;
+      generateOptions();
+    }
+  }
+  private void generateOptions()
+  {
+    List<string> ops = new List<string>();
+    if(_animation != BaseAnimationType.None)
+    {
+      ops.Add($"animation: {_animation.GetValue<BaseAnimationType>()}");
+    }
+    if(_autoplay > 0)
+    {
+      ops.Add($"autoplay: {_autoplay}");
+    }
+    if(_autoplayInterval > 0)
+    {
+      ops.Add($"autoplay-interval	: {_autoplayInterval}");
+    }
+    if(_autoplayInterval > 0)
+    {
+      ops.Add($"pause-on-hover : {_pauseOnHover}");
+    }
+    if(_videoAutoplay)
+    {
+      ops.Add($"video-autoplay: {_videoAutoplay}");
+    }
+    if(_index > 0)
+    {
+      ops.Add($"index: {_index}");
+    }
+
+    if(ops.Count > 0)
+    {
+      UnknownParameters.Add("uk-lightbox", string.Join("; ", ops));
+    }
+  }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

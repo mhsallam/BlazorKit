@@ -1,0 +1,159 @@
+﻿@inherits BlazorKitComponentBase
+@using BlazorKit.Util
+@using Microsoft.AspNetCore.Components
+
+@if (!string.IsNullOrWhiteSpace(Label) && (Type != InputType.Checkbox || Type != InputType.Radio))
+{
+  <FormLabel For="@Id">
+    <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" id="@Id" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex" value="@Value" onchange="@onchange">
+      @ChildContent
+    </DynamicElement>
+    <span> </span>@Label
+  </FormLabel>
+}
+else if (!string.IsNullOrWhiteSpace(Label))
+{
+  <FormLabel For="@Id">@Label</FormLabel>
+  <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" id="@Id" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex" value="@Value" onchange="@onchange">
+    @ChildContent
+  </DynamicElement>
+}
+else
+{
+  <DynamicElement Attributes="@UnknownParameters" TagName="@Tag" class="@classname" type="@Type" id="@Id" readonly="@IsReadonly" disabled="@IsDisabled" multiple="@IsMultipleSelect" size="@SelectSize" selectedIndex="@SelectedIndex" value="@Value" onchange="@onchange">
+    @ChildContent
+  </DynamicElement>
+}
+@if (NewLine)
+{
+  <br />
+}
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var size = Size != BaseSizeAndDefault.None ? $"uk-form-{Size.ToString().ToLower()}" : null;
+      var inputWidth = InputWidth != ExtraSmallToLargeSize.None ? InputWidth.GetValue<ExtraSmallToLargeSize>("uk-form-width-") : null;
+      var width = Width.GetValues<WidthSize>(" ", "uk-width-");
+      var state = State != InputState.None ? State.GetValue<InputState>("uk-form-") : null;
+      var isBlank = IsBlank ? "uk-form-blank" : null;
+      var cls = GetClass();
+      return $"{state} {size} {inputWidth} {width} {isBlank} {cls} {Class}";
+    }
+  }
+
+  string Tag
+  {
+    get
+    {
+      switch (Type)
+      {
+        case InputType.Select:
+          return "select";
+        case InputType.TextArea:
+          return "textarea";
+        default:
+          return "input";
+      }
+    }
+  }
+
+  [Parameter] private InputType Type { get; set; } = InputType.Text;
+  [Parameter] private BaseSizeAndDefault Size { get; set; } = BaseSizeAndDefault.None;
+  [Parameter] private ExtraSmallToLargeSize InputWidth { get; set; } = ExtraSmallToLargeSize.None;
+  [Parameter] private WidthSize Width { get; set; } = WidthSize.None;
+  [Parameter] private InputState State { get; set; } = InputState.None;
+  [Parameter] private bool IsBlank { get; set; }
+  [Parameter] private bool IsReadonly { get; set; }
+  [Parameter] private bool IsPlaintext { get; set; }
+
+  private bool _isDisabled = false;
+  [Parameter]
+  private bool IsDisabled
+  {
+    get
+    {
+      return _isDisabled;
+    }
+    set
+    {
+      _isDisabled = value;
+      if (_isDisabled)
+      {
+        UnknownParameters.Add("disabled", true);
+      }
+    }
+  }
+  private bool _isChecked { get; set; }
+  [Parameter]
+  private bool IsChecked
+  {
+    get { return _isChecked; }
+    set
+    {
+      _isChecked = value;
+      if ((Type == InputType.Checkbox || Type == InputType.Radio) && _isChecked)
+      {
+        UnknownParameters.Add("checked", true);
+      }
+    }
+  }
+  private bool _isMultipleSelect { get; set; }
+  [Parameter]
+  private bool IsMultipleSelect
+  {
+    get { return _isMultipleSelect; }
+    set
+    {
+      _isMultipleSelect = value;
+      if (Type == InputType.Select && _isMultipleSelect)
+      {
+        UnknownParameters.Add("multiple", true);
+      }
+    }
+  }
+  private int _selectSize { get; set; }
+  [Parameter]
+  private int SelectSize
+  {
+    get { return _selectSize; }
+    set
+    {
+      _selectSize = value;
+      if (Type == InputType.Select)
+      {
+        UnknownParameters.Add("size", _selectSize);
+      }
+    }
+  }
+  [Parameter] private int SelectedIndex { get; set; }
+  [Parameter] private string Value { get; set; }
+  [Parameter] private Action<string> ValueChanged { get; set; }
+  [Parameter] private bool NewLine { get; set; } = true;
+  [Parameter] private string Label { get; set; }
+  [Parameter] private string Id { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+
+  private string GetClass()
+  {
+    switch (this.Type)
+    {
+      case InputType.Checkbox:
+        return "uk-checkbox";
+      case InputType.Radio:
+        return "uk-radio";
+      case InputType.Range:
+        return "uk-range";
+      default:
+        return "uk-input";
+    }
+  }
+
+  void onchange(UIChangeEventArgs e)
+  {
+    ValueChanged?.Invoke((string)e.Value);
+  }
+}
