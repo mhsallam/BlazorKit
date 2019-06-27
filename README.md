@@ -2,7 +2,9 @@
 
 ### A Ui-Kit Components Library Wrapper for Blazor
 
-![BlazorKit NuGet Package](https://img.shields.io/nuget/vpre/Blazorkit.svg)
+
+![BlazorKit Package Installation](https://img.shields.io/nuget/vpre/BlazorKit.svg)
+![BlazorKit Downloads](https://img.shields.io/nuget/dt/BlazorKit.svg)
 
 I would say 80% of the UI kit components have been ported to Blazor. Right now I'll be working on the website and documentation.
 
@@ -10,11 +12,11 @@ I would say 80% of the UI kit components have been ported to Blazor. Right now I
  
 You can install a preview version of BlazorKit from NuGet using the following command:
 ```
-Install-Package Blazorkit -Version 0.1.1
+Install-Package Blazorkit -Version 0.1.101
 ```
 Or using dotnet CLI command:
 ```
-dotnet add package Blazorkit --version 0.1.1
+dotnet add package Blazorkit --version 0.1.101
 ```
 
 Now that you have installed BlazorKit, use its markup as described in the [BlazorKit](http://blazorkit.mhsallam.xyz) website, like this example which demonstrate creating an Alert component:
