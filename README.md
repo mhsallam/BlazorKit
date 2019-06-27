@@ -46,5 +46,5 @@ or Button:
 
 Note: completing the documentation and the website is still a work on progress
 
-# A Word of Thanks
-I would like to thank [@chanan](https://github.com/chanan) for his work on BlazorStrap that I learned many things from.
+# See Also
+[@chanan/BlazorStrap](https://github.com/chanan/BlazorStrap)
