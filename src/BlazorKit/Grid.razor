@@ -11,10 +11,10 @@
     {
       var width = Width != WidthSize.None ? Width.GetValues<WidthSize>(" ", "uk-width-") : null;
       var childWidth = ChildWidth != WidthSize.None ? ChildWidth.GetValues<WidthSize>(" ", "uk-child-width-") : null;
-      var gutterSize = GutterSize != GutterSize.None ? $"uk-gird-{GutterSize.ToString().ToLower()}" : null;
+      var gutterSize = GutterSize != GutterSize.None ? $"uk-grid-{GutterSize.ToString().ToLower()}" : null;
       var flexAlignment = FlexAlignment != FlexAlignment.None ? $"uk-flex-{FlexAlignment.ToString().ToLower()}" : null;
-      var withDivider = WithDivider ? "uk-gird-divider" : null;
-      var matchHeight = MatchHeight ? "uk-gird-match" : null;
+      var withDivider = WithDivider ? "uk-grid-divider" : null;
+      var matchHeight = MatchHeight ? "uk-grid-match" : null;
       return $"{childWidth} {gutterSize} {withDivider} {matchHeight} {flexAlignment} {Class}";
     }
   }

@@ -5,8 +5,11 @@ namespace BlazorKit
   public enum Alignment
   {
     None,
+    [EnumValue("left")]
     Left,
+    [EnumValue("center")]
     Center,
+    [EnumValue("right")]
     Right
   }
 

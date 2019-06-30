@@ -1,0 +1,60 @@
+﻿@inherits BlazorKitComponentBase
+@using BlazorKit.Util
+@using Microsoft.AspNetCore.Components
+
+<InLine>
+  <DynamicElement Attributes="@UnknownParameters" TagName="@tag" class="@classname" uk-icon="@options">
+    @ChildContent
+  </DynamicElement>
+</InLine>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var isButton = IsButton ? "uk-icon-button" : null;
+      var link = !string.IsNullOrWhiteSpace(Href) ? "uk-icon-link" : null;
+      return $"{isButton} {link} {Class}";
+    }
+  }
+  string options
+  {
+    get
+    {
+      var ratio = Ratio > 0 ? $"ratio: {Ratio}" : null;
+      var name = !string.IsNullOrWhiteSpace(Name) ? $"icon: {Name}" : null;
+      return string.Join("; ", new string[] { name, ratio });
+    }
+  }
+
+  [Parameter] private string Name { get; set; }
+  [Parameter] private bool IsButton { get; set; }
+  [Parameter] private int Ratio { get; set; }
+  [Parameter] private string Class { get; set; }
+
+  [Parameter]
+  private string tag
+  {
+    get
+    {
+      return _href != null ? "a" : "span";
+    }
+  }
+
+  private string _href = null;
+  [Parameter]
+  private string Href
+  {
+    get { return _href; }
+    set
+    {
+      _href = value;
+      if (_href != null)
+      {
+        UnknownParameters.Add("href", _href);
+      }
+    }
+  }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

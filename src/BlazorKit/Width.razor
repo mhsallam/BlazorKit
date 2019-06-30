@@ -1,0 +1,24 @@
+﻿@inherits BlazorKitComponentBase
+@using BlazorKit.Util
+@using Microsoft.AspNetCore.Components
+
+<DynamicElement Attributes="@UnknownParameters" TagName="div" class="@classname">
+  @ChildContent
+</DynamicElement>
+
+@functions {
+  string classname
+  {
+    get
+    {
+      var widthAtts = Size.GetValues<WidthSize>(" ", "uk-width-");
+      var childWidthAtts = ChildSize.GetValues<WidthSize>(" ", "uk-child-width-");
+      return $"{widthAtts} {childWidthAtts} {Class}";
+    }
+  }
+
+  [Parameter] private WidthSize Size { get; set; }
+  [Parameter] private WidthSize ChildSize { get; set; }
+  [Parameter] private string Class { get; set; }
+  [Parameter] private RenderFragment ChildContent { get; set; }
+}

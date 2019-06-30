@@ -1,7 +1,8 @@
+[](https://github.com/mhsallam/BlazorKit/blob/master/blazorkit.svg)
+
 # BlazorKit
 
 ### A Ui-Kit Components Library Wrapper for Blazor
-
 
 ![BlazorKit Package Installation](https://img.shields.io/nuget/vpre/BlazorKit.svg)
 ![BlazorKit Downloads](https://img.shields.io/nuget/dt/BlazorKit.svg)
@@ -47,4 +48,4 @@ or Button:
 Note: completing the documentation and the website is still a work on progress
 
 # See Also
-[@chanan/BlazorStrap](https://github.com/chanan/BlazorStrap)
+[chanan/BlazorStrap](https://github.com/chanan/BlazorStrap)

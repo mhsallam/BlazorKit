@@ -1,11 +1,10 @@
 ﻿@inherits BlazorKitComponentBase
 
-<DynamicElement Attributes="@UnknownParameters" TagName="img" class="@Class" uk-img />
+<DynamicElement src="@Source" Attributes="@UnknownParameters" TagName="img" class="@Class" uk-img />
 
 @functions {
   private string _src { get; set; }
-  [Parameter]
-  private string Source
+  [Parameter] private string Source
   {
     get { return _src; }
     set
@@ -15,8 +14,7 @@
     }
   }
   private bool _isSVG { get; set; }
-  [Parameter]
-  private bool IsSVG
+  [Parameter] private bool IsSVG
   {
     get { return _isSVG; }
     set
@@ -26,8 +24,7 @@
     }
   }
   private bool _isLazyLoad { get; set; }
-  [Parameter]
-  private bool IsLazyLoad
+  [Parameter] private bool IsLazyLoad
   {
     get { return _isLazyLoad; }
     set
@@ -37,8 +34,7 @@
     }
   }
   private string _visibilityTarget { get; set; }
-  [Parameter]
-  private string VisibilityTarget
+  [Parameter] private string VisibilityTarget
   {
     get { return _visibilityTarget; }
     set
@@ -48,8 +44,7 @@
     }
   }
   private string _srcSet { get; set; }
-  [Parameter]
-  private string SrcSet
+  [Parameter] private string SrcSet
   {
     get { return _srcSet; }
     set

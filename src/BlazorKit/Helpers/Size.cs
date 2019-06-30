@@ -213,6 +213,17 @@ namespace BlazorKit
     FourSixthAtExtraLargeScreen,
     [EnumValue("5-6@xl")]
     FiveSixthAtExtraLargeScreen,
+
+    [EnumValue("small")]
+    Small,
+    [EnumValue("medium")]
+    Medium,
+    [EnumValue("large")]
+    Large,
+    [EnumValue("xlarge")]
+    ExtraLarge,
+    [EnumValue("xxlarge")]
+    DoubleExtraLarge,
   }
 
   public enum HeightSize
