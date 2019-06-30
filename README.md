@@ -1,3 +1,5 @@
+<table>
+  <td width="160">
 <img src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53
 My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0ODUuODYgNDIxLjU4Ij48ZGVmcz48c3R5bGU+
 LmNscy0xe2ZpbGw6IzViMmU4Zjt9LmNscy0yLC5jbHMtM3tmaWxsOiNmZmY7fS5jbHMtM3tmb250
@@ -26,8 +28,9 @@ LjEgMTM3LjQ1Ii8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNOTY5LjMsNDc3Ljk0bC00NC44OCwy
 Ny4xMSw1MC44LDI5LjQ1djc3LjI0bC02OC40OCwzOC42M0w4MzguOSw2MTEuODNWNTUxLjk0bC00
 NS40My0yMy4xMlY2MzguNDRMOTA1LDcwNGwxMTUuNjMtNjUuNTZ2LTEzMVoiIHRyYW5zZm9ybT0i
 dHJhbnNsYXRlKC03MjUuMzQgLTMyOS43MSkiLz48dGV4dCBjbGFzcz0iY2xzLTMiIHRyYW5zZm9y
-bT0idHJhbnNsYXRlKDEyMi40NSAyNzguODIpIj5CSzwvdGV4dD48L3N2Zz4=" align="left" height="160" width="140" />
-
+bT0idHJhbnNsYXRlKDEyMi40NSAyNzguODIpIj5CSzwvdGV4dD48L3N2Zz4=" align="left" />
+</td>
+<td>
 
 # BlazorKit
 
@@ -36,7 +39,11 @@ bT0idHJhbnNsYXRlKDEyMi40NSAyNzguODIpIj5CSzwvdGV4dD48L3N2Zz4=" align="left" heigh
 ![BlazorKit Package Installation](https://img.shields.io/nuget/vpre/BlazorKit.svg)
 ![BlazorKit Downloads](https://img.shields.io/nuget/dt/BlazorKit.svg)
 
+</td>
+</table>
+
 I would say 80% of the UI kit components have been ported to Blazor. Right now I'll be working on the website and documentation.
+
 
 # Installation
  
