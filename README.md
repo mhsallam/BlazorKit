@@ -1,4 +1,7 @@
-[](https://github.com/mhsallam/BlazorKit/blob/master/blazorkit.svg)
+![](https://raw.githubusercontent.com/mhsallam/BlazorKit/master/blazorkit.svg)
+
+<img src="https://raw.githubusercontent.com/mhsallam/BlazorKit/master/blazorkit.svg" align="left" height="152" width="152" />
+
 
 # BlazorKit
 
